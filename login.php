@@ -20,7 +20,7 @@
 		$query = $conn->query($sql);
 
 		if($query->num_rows < 1){
-			$_SESSION['error'] = 'Cannot find voter with the ID';
+			$_SESSION['error'] = 'Invalid Credentials';
 		}
 		else{
 			$row = $query->fetch_assoc();
@@ -28,7 +28,7 @@
 				$_SESSION['voter'] = $row['id'];
 			}
 			else{
-				$_SESSION['error'] = 'Incorrect password';
+				$_SESSION['error'] = 'Invalid Credentials';
 			}
 		}
 		

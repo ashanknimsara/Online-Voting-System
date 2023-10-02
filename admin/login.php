@@ -20,7 +20,7 @@
 		$query = $conn->query($sql);
 
 		if($query->num_rows < 1){
-			$_SESSION['error'] = 'Cannot find account with the username';
+			$_SESSION['error'] = 'Invalid Admimn Credentials';
 		}
 		else{
 			$row = $query->fetch_assoc();
@@ -28,7 +28,7 @@
 				$_SESSION['admin'] = $row['id'];
 			}
 			else{
-				$_SESSION['error'] = 'Incorrect password';
+				$_SESSION['error'] = 'Invalid Admin Credentials';
 			}
 		}
 		
