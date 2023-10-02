@@ -3,7 +3,6 @@
 
 	if(isset($_GET['return'])){
 		$return = $_GET['return'];
-		
 	}
 	else{
 		$return = 'home.php';
@@ -17,7 +16,18 @@
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
 		$photo = $_FILES['photo']['name'];
-		if(password_verify($curr_password, $user['password'])){
+
+		// Check if the new password meets the strong password policy
+		if (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password) || !preg_match('/[0-9]/', $password) || !preg_match('/[!@#$%^&*()\-_=+{};:,<.>]/', $password)) {
+			$_SESSION['error'] = 'Password does not meet the strong password policy requirements. It should:';
+			$_SESSION['error'] .= '<ul>';
+			$_SESSION['error'] .= '<li>Be at least 8 characters long</li>';
+			$_SESSION['error'] .= '<li>Contain at least one uppercase letter</li>';
+			$_SESSION['error'] .= '<li>Contain at least one lowercase letter</li>';
+			$_SESSION['error'] .= '<li>Contain at least one digit</li>';
+			$_SESSION['error'] .= '<li>Contain at least one special character (e.g., !@#$%^&*()\-_=+{};:,<.>)</li>';
+			$_SESSION['error'] .= '</ul>';
+		} else if (password_verify($curr_password, $user['password'])){
 			if(!empty($photo)){
 				move_uploaded_file($_FILES['photo']['tmp_name'], '../images/'.$photo);
 				$filename = $photo;	
