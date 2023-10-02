@@ -1,3 +1,4 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?php
   	session_start();
   	if(isset($_SESSION['admin'])){
@@ -29,6 +30,9 @@
           </div>
       		<div class="row">
     			<div class="col-xs-4">
+					<!--recaptcha-->
+					<div class="g-recaptcha" data-sitekey="6LcdTW4oAAAAAKhUu665LFKZdiqJww3Q-pDL8eCt"></div><!--end of recaptcha-->
+					<br>
           			<button type="submit" class="btn btn-primary btn-block btn-curve" style="background-color: #4682B4 ;color:black ; font-size: 12px; font-family:Times" name="login"><i class="fa fa-sign-in"></i> Sign In</button>
         		</div>
       		</div>
