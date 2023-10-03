@@ -6,7 +6,7 @@
 
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
-
+ <!-- Content Wrapper. Contains page content -->
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style="background-color: #F1E9D2 " >
     <!-- Content Header (Page header) -->
