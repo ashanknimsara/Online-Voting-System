@@ -26,7 +26,7 @@
             <div class='alert alert-danger alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
               <h4><i class='icon fa fa-warning'></i> Error!</h4>
-              ".$_SESSION['error']."
+              ".htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8')."
             </div>
           ";
           unset($_SESSION['error']);
@@ -36,7 +36,7 @@
             <div class='alert alert-success alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
               <h4><i class='icon fa fa-check'></i> Success!</h4>
-              ".$_SESSION['success']."
+              ".htmlspecialchars($_SESSION['success'], ENT_QUOTES, 'UTF-8')."
             </div>
           ";
           unset($_SESSION['success']);
