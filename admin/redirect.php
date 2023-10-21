@@ -1,39 +1,57 @@
 <?php
-require_once '../vendor/autoload.php';
+require 'includes/conn.php'; // Database connection code here
 
-// Include the database connection details
-include 'includes/conn.php';
+if (isset($_SESSION['admin'])) {
+    header('location: home.php');
+}
 
-// init configuration
-$clientID = '612464270278-ptt4bh9ekc16c23fad8sc1dhf5jrrluo.apps.googleusercontent.com'; // Replace with your Google OAuth client ID
-$clientSecret = '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'; // Replace with your Google OAuth client secret
-$redirectUri = 'http://localhost/Online-Voting-System/admin/redirect.php'; // Replace with your redirect URI
+require_once 'C:\xampp\htdocs\Online-Voting-System\vendor\autoload.php'; // Include Google API PHP client library
 
-// create Client Request to access Google API
+$clientID = '612464270278-3bieqja4d6tki4g285gr0slkcu0803qb.apps.googleusercontent.com';
+$clientSecret = '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';
+$redirectUri = 'http://localhost/Online-Voting-System/admin/redirect.php'; // Redirect URI
+
 $client = new Google_Client();
 $client->setClientId($clientID);
 $client->setClientSecret($clientSecret);
 $client->setRedirectUri($redirectUri);
-$client->addScope("email");
-$client->addScope("profile");
+$client->addScope('email');
+
+function redirectToGoogleAuth($client) {
+    $authUrl = $client->createAuthUrl();
+    header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
+}
 
 if (isset($_GET['code'])) {
-    $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-    $client->setAccessToken($token['access_token']);
+    try {
+        $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+        $client->setAccessToken($token);
 
-    // Get the user's email from Google
-    $googleEmail = $client->verifyIdToken($token['id_token'])['email'];
+        if ($client->getAccessToken()) {
+            $oauth2 = new Google_Service_Oauth2($client);
+            $userData = $oauth2->userinfo->get();
 
-    // Check if the email exists in the "admin" table
-    $query = "SELECT * FROM admin WHERE email = '$googleEmail'";
-    $result = mysqli_query($conn, $query);
+            // Check if the user's email exists in your database
+            $googleEmail = $userData->email;
+            $sql = "SELECT * FROM admin WHERE email = '$googleEmail'";
+            $query = $conn->query($sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        // Email exists in the "admin" table, redirect to your desired page
-        header('location: home.php');
-    } 
+            if ($query->num_rows > 0) {
+                session_start();
+                $row = $query->fetch_assoc();
+                $_SESSION['admin'] = $row['id'];
+                header('location: home.php'); // Redirect to the home page
+            } else {
+                $_SESSION['error'] = 'Google email not registered.';
+                header('location: index.php'); // Redirect back to the login page
+            }
+        }
+    } catch (Exception $e) {
+        $_SESSION['error'] = 'Google authentication failed.';
+        header('location: index.php');
+    }
 } else {
-    // Email does not exist in the "admin" table
-    echo "Email not found in the database.";
+    // Display Google account selection when "Login with Google" is clicked
+    redirectToGoogleAuth($client);
 }
 ?>
