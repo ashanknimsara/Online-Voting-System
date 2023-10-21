@@ -1,0 +1,17 @@
+{
+    "name": "ashan/online-voting-system",
+    "autoload": {
+        "psr-4": {
+            "Ashan\\OnlineVotingSystem\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ashan K Nimsara",
+            "email": "ashanknimsara@gmail.com"
+        }
+    ],
+    "require": {
+        "google/apiclient": "^2.15"
+    }
+}

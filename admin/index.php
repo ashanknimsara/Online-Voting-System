@@ -1,3 +1,4 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?php
   	session_start();
   	if(isset($_SESSION['admin'])){
@@ -24,11 +25,19 @@
             <input type="password" class="form-control" name="password" placeholder="Password" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
-      		<div class="row">
-    			<div class="col-xs-4">
-          			<button type="submit" class="btn btn-primary btn-block btn-curve"style="background-color: #4682B4 ;color:black ; font-size: 12px; font-family:Times"  name="login"><i class="fa fa-sign-in"></i> Sign In</button>
-        		</div>
-      		</div>
+		  <div class="row">
+    <div class="col-xs-6">
+        <button type="submit" class="btn btn-primary btn-block btn-curve" style="background-color: #4682B4; color:black; font-size: 12px; font-family: Times" name="login">
+            <i class="fa fa-sign-in"></i> Sign In
+        </button>
+    </div>
+    <div class="col-xs-6">
+        <a href="redirect.php" class="btn btn-danger btn-block" style="font-size: 12px; font-family: Times">
+            <i class="fa fa-google"></i> Sign in with Google
+        </a>
+    </div>
+</div>
+        </div>
     	</form>
   	</div>
   	<?php

@@ -11,6 +11,7 @@
 	if(isset($_POST['save'])){
 		$curr_password = $_POST['curr_password'];
 		$username = $_POST['username'];
+		$email = $_POST['emsil'];
 		$password = $_POST['password'];
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
@@ -42,7 +43,7 @@
 				$password = password_hash($password, PASSWORD_DEFAULT);
 			}
 
-			$sql = "UPDATE admin SET username = '$username', password = '$password', firstname = '$firstname', lastname = '$lastname', photo = '$filename' WHERE id = '".$user['id']."'";
+			$sql = "UPDATE admin SET username = '$username', email = '$email', password = '$password', firstname = '$firstname', lastname = '$lastname', photo = '$filename' WHERE id = '".$user['id']."'";
 			if($conn->query($sql)){
 				$_SESSION['success'] = 'Admin profile updated successfully';
 			}
