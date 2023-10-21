@@ -109,7 +109,7 @@
             var descriptionValue = descriptionInput.value.trim();
 
             // Check if the description is empty or contains the "<script>" or <alert> tags
-            if (descriptionValue === "" || descriptionValue.includes("<script>") || descriptionValue.includes("<alert>") ) {
+            if (descriptionValue === "" || descriptionValue.includes("<script>") || descriptionValue.includes("<alert>") || descriptionValue.includes("<")|| descriptionValue.includes(">") ) {
                 descriptionError.textContent = "Please input a valid description.";
                 return false; // Prevent form submission
             }
