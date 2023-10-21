@@ -25,20 +25,22 @@
             <input type="password" class="form-control" name="password" placeholder="Password" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
-		  <div class="row">
-		  <!-- <div class="g-recaptcha" data-sitekey="6LcdTW4oAAAAAKhUu665LFKZdiqJww3Q-pDL8eCt"></div>
-					<br> -->
-    <div class="col-xs-6">
-        <button type="submit" class="btn btn-primary btn-block btn-curve" style="background-color: #4682B4; color:black; font-size: 12px; font-family: Times" name="login">
-            <i class="fa fa-sign-in"></i> Sign In
-        </button>
-    </div>
-    <div class="col-xs-6">
-        <a href="redirect.php" class="btn btn-danger btn-block" style="font-size: 12px; font-family: Times">
-            <i class="fa fa-google"></i> Sign in with Google
-        </a>
-    </div>
-</div>
+      		<div class="row">
+    			<div class="col-xs-4">
+					<!-- recaptcha-->
+					<!-- <div class="g-recaptcha" data-sitekey="6LcdTW4oAAAAAKhUu665LFKZdiqJww3Q-pDL8eCt"></div> -->
+					<!--end of recaptcha -->
+					<br>
+						<button type="submit" class="btn btn-primary btn-block btn-curve" style="background-color: #4682B4; color:black; font-size: 12px; font-family: Times" name="login"><i class="fa fa-sign-in"></i> Sign In</button>
+          			
+        		</div>
+      		</div>
+			  <div class="row" style="padding-top: 10px;">
+            <div class="col-xs-6">
+                <a href="redirect.php" class="btn btn-danger btn-block">
+                    <i class="fa fa-google"></i> Sign in with Google
+                </a>
+            </div>
         </div>
     	</form>
   	</div>
